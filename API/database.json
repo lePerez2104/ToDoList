@@ -1,13 +1,8 @@
 {
   "todos": [
     {
-      "title": "Estudar Javascript",
-      "completed": true,
-      "id": 1
-    },
-    {
       "title": "Estudar Vue",
-      "completed": false,
+      "completed": true,
       "id": 2
     },
     {
@@ -24,36 +19,6 @@
       "title": "teste2",
       "completed": false,
       "id": 5
-    },
-    {
-      "title": "abc",
-      "completed": false,
-      "id": 6
-    },
-    {
-      "title": "xpto",
-      "completed": false,
-      "id": 7
-    },
-    {
-      "title": "xyz",
-      "completed": false,
-      "id": 8
-    },
-    {
-      "title": "123",
-      "completed": false,
-      "id": 9
-    },
-    {
-      "title": "test",
-      "completed": false,
-      "id": 10
-    },
-    {
-      "title": "qq",
-      "completed": false,
-      "id": 11
     }
   ]
 }

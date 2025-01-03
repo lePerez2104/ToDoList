@@ -8,9 +8,11 @@
           <template v-else>
             <ToDoFormAdd />
 
-            <ToDoItems />
+            <ToDoItems
+              v-if="$store.state.todos.length"
+            />
 
-            <ToDoEmpty />
+            <ToDoEmpty v-else />
           </template>
 
         </div>
