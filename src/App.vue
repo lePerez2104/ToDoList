@@ -23,7 +23,6 @@ import ToDoSpinner from '@/components/ToDoSpinner'
 import ToDoFormAdd from '@/components/ToDoFormAdd'
 import ToDoItems from '@/components/ToDoItems'
 import ToDoEmpty from '@/components/ToDoEmpty'
-import axios from 'axios'
 
 export default {
   name: 'App',
@@ -40,6 +39,10 @@ export default {
   },
   created() {
     this.loading = true
+    this.$store.dispatch('getTodos').finally( () => {
+      console.log('here');
+      this.loading = false
+    })
   },
 }
 </script>
