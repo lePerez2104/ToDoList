@@ -26,29 +26,34 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
-    data() {
-        return {
-            title: '',
-        }
-    },
-    methods: {
+    setup() {
+        const title = ref()
+        const store = useStore()
+
         // Validação para não inserir ToDo vazia
-        addTodo() {
-            if (!this.title) {
+        const addTodo = () => {
+            if (!title.value) {
                 return;
             }
-            this.$store.dispatch('addTodo', {
-                title: this.title,
+            store.dispatch('addTodo', {
+                title: title.value,
                 completed: false
 
             })
             // Validação para resetar o campo após inserir um novo item
             .finally( () => {
-                this.title = ''
+                title.value = ''
             })
-        },
+        }
+
+        return {
+            title,
+            addTodo,
+        }
     },
 }
 

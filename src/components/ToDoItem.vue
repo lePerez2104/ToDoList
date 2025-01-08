@@ -52,6 +52,8 @@ justify-center">
 </template>
 
 <script>
+import { ref } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
     props: {
@@ -61,41 +63,48 @@ export default {
         },
     },
 
-    data() {
-        return {
-            title: this.todo.title,
-            isCompleted: this.todo.completed,
-        }
-    },
+    setup(props) {
+        const title = ref(props.todo.title)
+        const isCompleted = ref(props.todo.completed)
+        const store = useStore()
 
-    methods: {
+        // Deletar item
+        const onDelete = () => {
+            store.dispatch('deleteTodo', props.todo.id)
+        }
+
         // Atualizar item
-        updateTodo() {
+        const updateTodo = () => {
             const payload = {
-                id: this.todo.id,
+                id: props.todo.id,
                 data: {
-                    title: this.title,
-                    completed: this.isCompleted
+                    title: title.value,
+                    completed: isCompleted.value
                 }
             }
-            this.$store.dispatch('updateTodo', payload)
-        },
+            store.dispatch('updateTodo', payload)
+        }
 
         // Alterar título do item
-        onTitleChange() {
-            if(!this.title) {
+        const onTitleChange = () => {
+            if(!title.value) {
                 return
             }
-            this.updateTodo()
-        },
+            updateTodo()
+        }
 
         // Dar check ou não na tarefa e atualizar item
-        onCheckClick() {
-            this.isCompleted = !this.isCompleted
-            this.updateTodo()
-        },
-        onDelete() {
-            this.$store.dispatch('deleteTodo', this.todo.id)
+        const onCheckClick = () => {
+            isCompleted.value = !isCompleted.value
+            updateTodo()
+        }
+
+        return {
+            title,
+            isCompleted,
+            onDelete,
+            onTitleChange,
+            onCheckClick,
         }
     },
 }
